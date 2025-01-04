@@ -1,0 +1,220 @@
+models:      
+  - name: dim_customer
+    description: "Contains records of customer details"
+    columns:
+      - name: id
+        data_type: bigint
+        description: "The unique identifier of the customer."
+        tests:
+          - not_null
+          - unique
+      - name: created
+        data_type: timestamp with time zone
+        description: "Timestamp indicating when the customer record was created."
+        tests:
+          - not_null
+      - name: updated
+        data_type: timestamp with time zone
+        description: "Timestamp indicating the last update time for this customer record."
+        tests:
+          - not_null
+      - name: is_deleted
+        data_type: boolean
+        description: "Flag indicating if the record is deleted"
+      - name: external_id
+        data_type: text
+        description: "The external ID associated with the customer."
+        tests:
+          - not_null
+          - unique
+      - name: title
+        data_type: text
+        description: "The title of the customer."
+      - name: first_name
+        data_type: text
+        description: "The first name of the customer."
+        tests:
+          - not_null
+      - name: last_name
+        data_type: text
+        description: "The last name of the customer."
+        tests:
+          - not_null
+      - name: middle_name
+        data_type: text
+        description: "The middle name of the customer."
+      - name: address
+        data_type: text
+        description: "The address of the customer."
+      - name: gender
+        data_type: text
+        description: "The gender of the customer"
+        tests:
+          - dbt_expectations.expect_column_distinct_values_to_be_in_set:
+              value_set: ['Other','Male','Female']
+              quote_values: true
+              row_condition: "id is not null"
+      - name: marital_status
+        data_type: text
+        description: "The marital status of the customer."
+      - name: date_of_birth
+        data_type: date
+        description: "The date of birth of the customer."
+      - name: phone
+        data_type: text
+        description: "The phone number of the customer."
+      - name: location
+        data_type: text
+        description: "The location associated with the customer."
+      - name: property_size
+        data_type: text
+        description: "The size of the property owned by the customer."
+      - name: id_type
+        data_type: text
+        description: "The type of identification document"
+      - name: id_number
+        data_type: text
+        description: "The identification number"
+      - name: emergency_contact_phone
+        data_type: text
+        description: "Emergency contact phone number"
+      - name: emergency_contact_name
+        data_type: text
+        description: "Emergency contact name"
+      - name: emergency_contact_relationship
+        data_type: text
+        description: "Relationship with emergency contact"
+      - name: national_id
+        data_type: text
+        description: "National identification number"
+      - name: location_coordinates
+        data_type: text
+        description: "The coordinates of the customer's location"
+      - name: location_boundary
+        data_type: text
+        description: "The boundary coordinates of the customer's location"
+      - name: is_restricted
+        data_type: boolean
+        description: "Flag indicating if the customer is restricted"
+      - name: languages
+        data_type: text
+        description: "Languages spoken by the customer"
+      - name: branch_id
+        data_type: bigint
+        description: "The unique identifier of the associated branch"
+      - name: phone_verified
+        data_type: boolean
+        description: "Flag indicating if phone number is verified"
+      - name: phone_status
+        data_type: text
+        description: "Status of phone verification"
+      - name: coordinate_status
+        data_type: text
+        description: "Status of location coordinates"
+      - name: id_verification_status
+        data_type: text
+        description: "Status of ID verification"
+      - name: is_id_verified
+        data_type: boolean
+        description: "Flag indicating if ID is verified"
+      - name: verified_name
+        data_type: text
+        description: "Name as verified on ID"
+      - name: name_verification_match
+        data_type: boolean
+        description: "Flag indicating if name matches verified ID"
+      - name: category_name
+        data_type: text
+        description: "Customer category name"
+      - name: category_code
+        data_type: text
+        description: "Customer category code"
+      - name: agent_name
+        data_type: text
+        description: "Name of associated agent"
+      - name: agent_code
+        data_type: text
+        description: "Code of associated agent"
+      - name: agent_phone
+        data_type: text
+        description: "Phone number of associated agent"
+      - name: group_id
+        data_type: bigint
+        description: "The unique identifier of associated group"
+      - name: group_name
+        data_type: text
+        description: "Name of associated group"
+      - name: group_code
+        data_type: text
+        description: "Code of associated group"
+      - name: district
+        data_type: text
+        description: "District of residence"
+      - name: account_numbers
+        data_type: text
+        description: "Associated account numbers"
+      - name: region_of_origin
+        data_type: text
+        description: "Region of origin"
+      - name: region_of_residence
+        data_type: text
+        description: "Region of current residence"
+      - name: state_of_origin
+        data_type: text
+        description: "State of origin"
+      - name: state_of_residence
+        data_type: text
+        description: "State of current residence"
+      - name: organization_id
+        data_type: bigint
+        description: "The unique identifier of the associated organization"
+
+  - name: dim_product
+    description: "Contains details of products"
+    columns:
+      - name: id
+        data_type: bigint
+        description: "The unique identifier of the product"
+        tests:
+          - not_null
+          - unique
+      - name: organization_id
+        data_type: bigint
+        description: "The identifier of the organization"
+      - name: created
+        data_type: timestamp with time zone
+        description: "Timestamp of record creation"
+        tests:
+          - not_null
+      - name: updated
+        data_type: timestamp with time zone
+        description: "Timestamp of last update"
+        tests:
+          - not_null
+      - name: grade_1_value
+        data_type: double precision
+        description: "Value for grade one"
+      - name: grade_2_value
+        data_type: double precision
+        description: "Value for grade two"
+      - name: grade_3_value
+        data_type: double precision
+        description: "Value for grade three"
+      - name: name
+        data_type: text
+        description: "Product name"
+        tests:
+          - not_null
+      - name: code
+        data_type: text
+        description: "Product code"
+        tests:
+          - not_null
+      - name: product_type
+        data_type: text
+        description: "Type of product"
+        tests:
+          - dbt_expectations.expect_column_distinct_values_to_be_in_set:
+              value_set: ['Type A', 'Type B', 'Type C', 'Type D', 'Type E']
+              quote_values: true
+              row_condition: "id is not null"
