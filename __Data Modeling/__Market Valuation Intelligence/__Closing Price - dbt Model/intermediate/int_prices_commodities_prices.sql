@@ -29,7 +29,7 @@ high_low_prices as (
         max(trade_price / calc_volume_per_unit) as max_price_kg,
         min(trade_price / calc_volume_per_unit) as min_price_kg
     from trade_transactions
-    where order_type = 'Buy' 
+    where order_type = 'Purchase' 
         and (source_name = 'SOURCE1' or source_name is null or source_name = '')
     group by date(deal_created_at), product
     order by date(deal_created_at), product
