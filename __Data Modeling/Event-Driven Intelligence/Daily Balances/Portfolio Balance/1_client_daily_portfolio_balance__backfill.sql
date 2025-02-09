@@ -1,15 +1,22 @@
+
+
+
+
+
+
+
 -- Table: fact_client_daily_portfolio_balance
 -- Purpose: Tracks daily portfolio balances for clients across different products and locations
 
 
 -- DDL for fact_client_daily_portfolio_balance table creation
 -- Option 1: Full table refresh (when schema remains unchanged)
-DELETE FROM public_mart.fact_client_daily_portfolio_balance;
+DELETE FROM analytics_mart.fact_client_daily_portfolio_balance;
 
--- Option 2: Table recreation (when schema changes needed)
--- DROP TABLE public_mart.fact_client_daily_portfolio_balance;
+-- Option 2: Table recreation (when schema change Is needed)
+-- DROP TABLE analytics_mart.fact_client_daily_portfolio_balance;
 
--- CREATE TABLE public_mart.fact_client_daily_portfolio_balance (
+-- CREATE TABLE analytics_mart.fact_client_daily_portfolio_balance (
 --     portfolio_date DATE,                       -- Date of the portfolio balance
 --     client_id VARCHAR(25),                     -- Unique identifier for client
 --     product_name TEXT,                         -- Name of the product
@@ -23,7 +30,7 @@ DELETE FROM public_mart.fact_client_daily_portfolio_balance;
 -- );
 
 -- Backfill Query: Updates fact_client_daily_portfolio_balance with historic records
-INSERT INTO public_mart.fact_client_daily_portfolio_balance (
+INSERT INTO analytics_mart.fact_client_daily_portfolio_balance (
     portfolio_date,
     client_id,
     product_name,
@@ -65,7 +72,7 @@ indexed_table AS (
 -- Generate date series for the required time period
 date_dim AS (
     SELECT date_actual
-    FROM public_mart.dim_date
+    FROM analytics_mart.dim_date
     WHERE date_actual BETWEEN '2023-01-01' AND (current_date - 1)
 ),
 

@@ -4,12 +4,12 @@
 
 -- DDL for fact_client_daily_balance table creation
 -- Option 1: Full table refresh (when schema remains unchanged)
-DELETE FROM public_mart.fact_client_daily_balance
+DELETE FROM analytics_mart.fact_client_daily_balance
 
--- Option 2: Table recreation (when schema changes needed)
--- DROP TABLE public_mart.fact_client_daily_balance;
+-- Option 2: Table recreation (when schema change Is needed)
+-- DROP TABLE analytics_mart.fact_client_daily_balance;
 
--- CREATE TABLE public_mart.fact_client_daily_balance (
+-- CREATE TABLE analytics_mart.fact_client_daily_balance (
 -- 				date DATE, 
 -- 				client_id VARCHAR(25),  
 -- 				account_balance DOUBLE PRECISION, 
@@ -19,7 +19,7 @@ DELETE FROM public_mart.fact_client_daily_balance
 
 
 -- Backfill Query: Updates fact_client_daily_balance with historic records
-INSERT INTO public_mart.fact_client_daily_balance (date, client_id, account_balance, latest_trans_at)
+INSERT INTO analytics_mart.fact_client_daily_balance (date, client_id, account_balance, latest_trans_at)
 
 
 WITH transactions AS(
@@ -56,7 +56,7 @@ date_dim AS (
         -- Generate a date range for the required period (adjustable based on business needs)
 	SELECT date_actual
 	
-	FROM public_mart.dim_date
+	FROM analytics_mart.dim_date
     
     WHERE date_actual between '2023-01-01' AND (current_date - 1)
 	),

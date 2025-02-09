@@ -15,13 +15,13 @@ config = configparser.ConfigParser()
 config.read(f"{dir_path}/config.ini")
 
 # Set up database connection using credentials from config
-config_source = 'SOURCE_DB'
+config_source = 'ANALYTICS_SOURCE_DB'
 source_engine, conn_source = db_conn(conn_param=config_source)
 
 # Check if we already have balance records for yesterday in the database
 check_query = """
 SELECT COUNT(*) as count
-FROM public_mart.fact_client_daily_portfolio_balance
+FROM analytics_mart.fact_client_daily_portfolio_balance
 WHERE DATE(portfolio_date) = (CURRENT_DATE - 1)"""
 # This checks for yesterday's date because the updates for a particular day are done the following day
 
@@ -31,7 +31,7 @@ existing_count = pd.read_sql_query(check_query, source_engine).iloc[0]['count']
 # If records exist for yesterday, delete them to avoid duplicates
 if existing_count > 0:
     delete_query = """
-    DELETE FROM public_mart.fact_client_daily_portfolio_balance
+    DELETE FROM analytics_mart.fact_client_daily_portfolio_balance
     WHERE DATE(portfolio_date) = (CURRENT_DATE - 1)
     """
     with source_engine.connect() as connection:
@@ -121,4 +121,4 @@ print('\n\n\ntoday_date :',yesterday)
 # Save the final dataset to the database
 # If table doesn't exist, it will be created
 # If table exists, new records will be appended
-fin_data.to_sql('fact_client_daily_portfolio_balance', source_engine, schema='public_mart', index=False, if_exists="append")
+fin_data.to_sql('fact_client_daily_portfolio_balance', source_engine, schema='analytics_mart', index=False, if_exists="append")
