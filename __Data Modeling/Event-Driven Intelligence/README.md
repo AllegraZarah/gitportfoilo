@@ -26,7 +26,7 @@ Each project demonstrates the power of event-driven architecture in solving comp
 &nbsp;
 ## Projects in Detail
 
-### <u>[Daily Balances System: Building Financial Intelligence](./__Daily%20Balances/)</u>
+### <u>[Daily Balances System: Building Financial Intelligence](./Daily%20Balances/)</u>
 *Transforming transaction logs into actionable daily balance insights*
 
 #### <u>The Challenge</u> <small>
@@ -42,9 +42,9 @@ This system comprises three distinct but similar models:
 
 | Model | Purpose | Key Features |
 |-------|---------|--------------|
-| [Client Account Balance](./__Daily%20Balances/Account%20Balance/) | Daily cash position tracking | • Complete transaction history<br>• Daily balance snapshots<br>• Automated reconciliation |
-| [Portfolio Balance](./__Daily%20Balances/Portfolio%20Balance/) | Asset holdings monitoring | • Product-level tracking<br>• Lien management<br>• Available units calculation |
-| [Inventory Position](./__Daily%20Balances/__Inventory%20Balance/) | Company-wide stock tracking | • Location-wise tracking<br>• Daily position updates<br>• Historical snapshots |
+| [Client Account Balance](./Daily%20Balances/Account%20Balance/) | Daily cash position tracking | • Complete transaction history<br>• Daily balance snapshots<br>• Automated reconciliation |
+| [Portfolio Balance](./Daily%20Balances/Portfolio%20Balance/) | Asset holdings monitoring | • Product-level tracking<br>• Lien management<br>• Available units calculation |
+| [Inventory Position](./Daily%20Balances/Inventory%20Balance/) | Company-wide stock tracking | • Location-wise tracking<br>• Daily position updates<br>• Historical snapshots |
 
 #### <u>Technical Implementation</u> <small>
 1. **Data Engineering Pipeline**
