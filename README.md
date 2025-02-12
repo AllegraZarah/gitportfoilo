@@ -5,7 +5,7 @@ Welcome to my portfolio repository! This repository showcases various data-relat
 
 ## About Me
 
-I am a data engineer and analytics professional with a passion for turning data into actionable insights. This portfolio is a collection of my work, demonstrating my skills in data engineering, analytics engineering, and more.
+I am a data engineer and analytics engineering professional with a passion for turning data into actionable insights. This portfolio is a collection of my work, demonstrating my skills in data engineering, analytics engineering, and more.
 
 Thank you for visiting my portfolio repository!
 
