@@ -12,4 +12,6 @@ Thank you for visiting my portfolio repository!
 
 ## Table of Contents
 
-#### In Progress ...
+[Data Modeling](./Data%20Modeling/README.md) <small>
+- [Event-Driven Intelligence](./Data%20Modeling/Event-Driven%20Intelligence/README.md)
+- [Market Valuation Intelligence](./Data%20Modeling/Market%20Valuation%20Intelligence/README.md) </small>
