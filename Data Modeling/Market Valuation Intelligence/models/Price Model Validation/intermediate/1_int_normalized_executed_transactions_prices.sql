@@ -28,13 +28,13 @@ reconciled_market_trades as (
 ),
 
 inventory_registry as (
-    -- Extract and categorize inventory data from warehouses.
+    -- Extract and categorize inventory data from stores.
     select date(inv.entry_date) record_date, inv.item_id, inv.item_label, 
             concat('INV', inv.item_id) listing_code, 
             inv.grade_level, inv.total_weight,
             inv.price_per_ton, inv.price_per_ton / 1000 as price_per_kg, 
             inv.trade_category, inv.receipt_id,
-            warehouse.region final_destination,
+            store.region final_destination,
             case 
                 when inv.item_id like '%CTN%' then 'Cotton'
                 when inv.item_id like '%COF%' then 'Coffee'
@@ -48,8 +48,8 @@ inventory_registry as (
                 else inv.item_id
             end grouped_product_name -- Standardizes product classification
     from {{ source ('public', 'fact_inventory') }} inv
-    left join {{ source ('public', 'dim_warehouses') }} warehouse
-        on inv.storage_id = warehouse.storage_id
+    left join {{ source ('public', 'dim_stores') }} store
+        on inv.storage_id = store.storage_id
     where item_category = 'Agri-Product'
             and inv.tenant_key = '8'
             and inv.is_verified is true
@@ -65,7 +65,7 @@ inventory_registry as (
 combined_market_inventory as (
     -- Combine inventory records with executed market transactions.
     select record_date, grouped_product_name, item_label, item_id, listing_code, 
-           'Warehouse Receipt' as asset_type, receipt_id as record_id, total_weight as volume_kg, 
+           'Store Receipt' as asset_type, receipt_id as record_id, total_weight as volume_kg, 
            price_per_kg, final_destination
     from inventory_registry
     

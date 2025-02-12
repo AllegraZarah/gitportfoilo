@@ -1,0 +1,35 @@
+version: 2
+
+sources:
+  - name: public
+    description: "Schema contains source tables pulled from the generating system."
+    tables:
+      - name: dim_date
+        description: "Date dimension table."
+      - name: trading_transactions
+        description: "Contains individual trade transaction records."
+      - name: historical_product_prices
+        description: "Historical prices for various products."
+      - name: product_prices
+        description: "Current product prices. Starts from when the h9storical prices end."
+      - name: historic_asset_prices
+        description: "Historical prices for various assets."
+      - name: product_metadata
+        description: "Metadata for products including name, code, location, etc."
+      - name: fact_inventory
+        description: "Records on store inventory."
+      - name: dim_stores
+        description: "Metadata on the stores."
+      - name: geo_location
+        description: "Geographical locations of trades."
+
+
+  - name: analytics_mart
+    description: "Schema that stores modeled trade-related data."
+    tables:
+      - name: fact_product_market_prices
+        description: "Contains modeled price data including the end of day , minimum, maximum and start pf day prices and the changes over time."
+      - name: national_trade_volume
+        decsription: "Contains aggregated national trade volumes."
+      - name: transport_matrix
+        description: "Transportation grid dimensions for product movement."

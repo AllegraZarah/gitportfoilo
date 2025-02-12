@@ -7,38 +7,28 @@ price as (
     -- Data before a specific date is sourced externally, while on-system data is used thereafter.
     
     select date(date) as date,
-           case 
-               when product = 'productA' then 'CMA'
-               when product = 'productB' then 'CMB'
-               when product = 'productC' then 'CMC'
-               else product
-           end as product_code,
-           case 
-               when product = 'productA' then 'product A Description'
-               when product = 'productB' then 'product B Description'
-               when product = 'productC' then 'product C Description'
-               else product
-           end as product_name,
-           (price * 10) / 1000 as product_eod_price, -- Adjusted price
-           'external_source' as source
-    from {{ source('external_data', 'historical_prices') }}
+           product_code,
+           product_name,
+           (price * 10) / 1000 as product_eod_price,
+           'historical_source' as price_source
+    from {{ source('public', 'historical_product_prices') }}
 
     UNION
 
     select price.date,
-           case when price.product_code = 'CODEX' then 'CODEY' else price.product_code end as product_code,
-           comm.name as product_name,
+           comm.product_code,
+           comm.product_name,
            price.price as product_eod_price,
-           'internal_source' as source
-    from {{ source('internal_data', 'product_prices') }} price
-    left join {{ source('internal_data', 'product_metadata') }} comm
+           'current_source' as price_source
+    from {{ source('public', 'product_prices') }} price
+    left join {{ source('public', 'product_metadata') }} comm
     on price.product_code = comm.code
     where price.price != 0
 ),
 
 ranked_prices as (
     select *,
-           row_number() over (partition by date, product_code order by date, source) as row_num
+           row_number() over (partition by date, product_code order by date, price_source) as row_num
     from price
 ),
 
@@ -61,8 +51,8 @@ non_null_day_prices as (
                         over (partition by distinct_comm.product_code order by dim_date.date_actual)
                else product_eod_price
            end as product_eod_price,
-           eod_prices.source
-    from {{ source('public', 'date_dimension') }} dim_date -- Using a public date dimension
+           eod_prices.price_source
+    from {{ ref('stg_date') }} dim_date
     cross join (select distinct product_code, product_name from eod_prices) distinct_comm
     left join eod_prices
     on dim_date.date_actual = eod_prices.date

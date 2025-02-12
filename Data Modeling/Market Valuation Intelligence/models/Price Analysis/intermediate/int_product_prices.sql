@@ -13,16 +13,17 @@ closing_sod_price as (
         price.product_name as product,
         price.product_eod_price as eod_price,
         lag(price.product_eod_price, 1) over (partition by price.product_code order by price.date) as sod_price
-    from {{ ref('stg_commodities_eod_prices') }} price
+    
+    from {{ ref('stg_product_prices') }} price
     where date >= '2020-01-01'
 ),	
 
 trade_transactions as (
     select *
-    from {{ source('public_trade_data', 'individual_trade_transactions') }}
+    from {{ ref('stg_fact_marketflows') }}
 ),
 	
-high_low_prices as (
+high_low_prices as ( -- Determine the highest and lowest price per product traded on a given day
     select 
         date(deal_created_at) as date,
         product,
@@ -35,7 +36,7 @@ high_low_prices as (
     order by date(deal_created_at), product
 ),	
 
-commodities_prices as (
+products_prices as (
     select 
         closing_sod_price.*,
         high_low_prices.max_price_kg,
@@ -61,7 +62,7 @@ non_null_minmax as (
             when (min_price_kg is null) and (eod_price <= sod_price) then eod_price
             else min_price_kg
         end as min_price_kg
-    from commodities_prices
+    from products_prices
 )
 
 select *

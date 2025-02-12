@@ -19,7 +19,7 @@ pre_changes_values as (
         end as season,
         concat('Q', extract(quarter from date::timestamp), ' ', extract(year from date::timestamp)) as quarter,
         concat(extract(month from date::timestamp), '_', extract(year from date::timestamp)) as month_identifier
-    from {{ ref('int_prices_commodities_prices') }} nnm
+    from {{ ref('int_product_prices') }} nnm
 ),
 
 changes_values as (

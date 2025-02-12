@@ -7,7 +7,7 @@ with recursive
 -- Get initial prices for the earliest date in the dataset
 start_price as (
     select date, product_code, product, final_price_per_kg
-    from from {{ source ('public', 'fact_product_market_prices') }}
+    from {{ source ('public', 'fact_product_market_prices') }}
     where date = (select min(date_actual) from {{ref ('int_mean_market_prices')}})
     ),
 

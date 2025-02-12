@@ -1,0 +1,12 @@
+analytics_mart:
+  target: dev
+  outputs:
+    dev:
+      dbname: Database
+      host: whatdoyouthink.lookout.us-west-2.rds.amazonaws.com
+      pass: GRF!6728H_(kwlo9o*+542hHYw
+      port: 5432
+      schema: analytics_mart
+      threads: 2
+      type: postgres
+      user: allowed_user
