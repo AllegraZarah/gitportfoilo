@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Load environment variables from the .env file
+source $PWD/.env
+
+echo "Starting script"
+
+# Activate the virtual environment
+source $VIRTUAL_ENV/bin/activate
+echo "Virtual Environment Activated: $(which python)"
+
+# Execute the Python script
+python $SCRIPT.py
+
+# Deactivate the virtual environment after execution
+deactivate
+echo "Virtual Environment Deactivated"
+
+echo "Script finished"

@@ -15,3 +15,9 @@ Thank you for visiting my portfolio repository!
 [Data Modeling](./Data%20Modeling/README.md) <small>
 - [Event-Driven Intelligence](./Data%20Modeling/Event-Driven%20Intelligence/README.md)
 - [Market Valuation Intelligence](./Data%20Modeling/Market%20Valuation%20Intelligence/README.md) </small>
+
+&nbsp;
+
+[Secure Data Ingestion](./Secure%20Data%20Ingestion/README.md) <small>
+- [API Ingestion](./Secure%20Data%20Ingestion/API%20Ingestion/)
+- [S3 Ingestion](./Secure%20Data%20Ingestion/S3%20Ingestion/) </small>
