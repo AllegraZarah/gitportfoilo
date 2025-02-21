@@ -28,6 +28,9 @@ Thank you for visiting my portfolio repository!
     - [Customer Segmentation](./Machine%20Learning/Customer%20Segmentation/README.md) </small>
 
 
+4. [Shell Scripting](./README.md)
+
+
 
 
 &nbsp;
