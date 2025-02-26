@@ -19,7 +19,7 @@ assets_with_location as (
 			ELSE asset_code
 			END consolidated_product_name
 	
-	from {{ source ('public', 'historic_asset_price')}}
+	from {{ source ('public', 'historical_asset_prices')}}
 		
 	where asset_type in ('Futures', 'Forward', 'Options') and (asset_code like '%COF%' or asset_code like '%TEA%' or 
 							asset_code like '%TRM%' or asset_code like '%RIC%' or asset_code like '%PLM%' or 
@@ -29,8 +29,8 @@ assets_with_location as (
 asset_closing_price as (
 	select asset_date.date_actual, asset_with_loc.*, loc.state, 
 			product_price.product_acp_fixed_weight,
-			coalesce(log_grid.cost_adjustment_per_kg, 0) logistics_differential,
-			(product_price.product_acp_fixed_weight - coalesce(log_grid.cost_adjustment_per_kg, 0)) asset_acp
+			coalesce(trans_matrix.cost_adjustment_per_kg, 0) logistics_differential,
+			(product_price.product_acp_fixed_weight - coalesce(trans_matrix.cost_adjustment_per_kg, 0)) asset_acp
 
 	from {{ ref ('stg_date') }} asset_date
 	cross join assets_with_location asset_with_loc
@@ -41,9 +41,9 @@ asset_closing_price as (
 	left join {{ source (public, 'geo_location') }} loc
 		on asset_with_loc.location = loc.name
 		
-	left join {{ ref ('stg_transport_matrix') }} log_grid
-		on asset_with_loc.consolidated_product_name = log_grid.product_label
-		and loc.state = log_grid.destination_region
+	left join {{ ref ('stg_transport_matrix') }} trans_matrix
+		on asset_with_loc.consolidated_product_name = trans_matrix.product_label
+		and loc.state = trans_matrix.destination_region
     )
 
 select *
