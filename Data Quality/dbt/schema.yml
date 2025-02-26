@@ -1,0 +1,174 @@
+version: 2
+
+models:
+  - name: fact_product_market_prices
+    description: >
+      Comprehensive price analysis model capturing daily market price metrics and temporal price movements.
+      This model serves as the primary source for price trend analysis and market monitoring.
+    columns:
+      - name: date
+        data_type: date
+        description: "Trading date for the price records"
+        tests:
+          - not_null
+          - unique
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: day
+              interval: 1
+      
+      - name: dow
+        data_type: integer
+        description: "Day of week (0-6, where 1 is Monday)"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 6
+
+      - name: adj_woy
+        data_type: integer
+        description: "Adjusted week of year for consistent weekly analysis"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+              max_value: 53
+
+      - name: season
+        data_type: text
+        description: "Trading season identifier"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              value_set: ['Spring', 'Summer', 'Fall', 'Winter']
+
+      - name: quarter
+        data_type: integer
+        description: "Fiscal quarter (1-4)"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+              max_value: 4
+
+      - name: product_code
+        data_type: text
+        description: "Unique identifier for the product"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: code
+
+      - name: eod_price
+        data_type: numeric
+        description: "End of day price in base currency"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              strictly_positive: true
+          - reasonable_price_movement:
+              max_movement_percentage: 15
+          - price_within_historical_range
+
+      - name: dod_price_change
+        data_type: numeric
+        description: "Day-over-day percentage price change"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: -100
+              max_value: 1000
+
+  - name: dim_customer
+    description: >
+      Customer dimension table containing comprehensive customer profile information,
+      including personal details, verification status, and organizational relationships.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+          max_value: 1000000
+    columns:
+      - name: id
+        data_type: bigint
+        description: "Primary key - unique customer identifier"
+        tests:
+          - not_null
+          - unique
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+              strictly_positive: true
+
+      - name: phone
+        data_type: text
+        description: "Customer contact number in E.164 format"
+        tests:
+          - dbt_expectations.expect_column_value_lengths_to_be_between:
+              min_value: 10
+              max_value: 15
+          - dbt_expectations.expect_column_values_to_match_regex:
+              regex: '^[+]?[0-9]+$'
+
+      - name: gender
+        data_type: text
+        description: "Customer's gender identity"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              value_set: ['Male', 'Female']
+
+      - name: id_verification_status
+        data_type: text
+        description: "Current status of identity verification process"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              value_set: ['PENDING', 'VERIFIED', 'REJECTED', 'EXPIRED']
+
+  - name: dim_product
+    description: >
+      Product dimension containing detailed product attributes, specifications,
+      and grading information. Core reference table for product analytics.
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+          max_value: 50
+    columns:
+      - name: id
+        data_type: bigint
+        description: "Primary key - unique product identifier"
+        tests:
+          - not_null
+          - unique
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+              strictly_positive: true
+
+      - name: name
+        data_type: text
+        description: "Product display name"
+        tests:
+          - not_null
+          - unique
+          - dbt_expectations.expect_column_value_lengths_to_be_between:
+              min_value: 2
+              max_value: 100
+
+      - name: code
+        data_type: text
+        description: "Unique product code for system reference"
+        tests:
+          - not_null
+          - unique
+          - dbt_expectations.expect_column_value_lengths_to_be_between:
+              min_value: 3
+              max_value: 20
+
+      - name: product_type
+        data_type: text
+        description: "Type of product"
+        tests:
+          - dbt_expectations.expect_column_distinct_values_to_be_in_set:
+              value_set: ['Type A', 'Type B', 'Type C', 'Type D', 'Type E']
+              quote_values: true
+              row_condition: "id is not null"

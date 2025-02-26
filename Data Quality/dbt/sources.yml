@@ -1,0 +1,233 @@
+version: 2
+
+sources:
+  - name: public
+    description: >
+      Primary data warehouse schema containing source trading system data.
+      This schema serves as the foundation for all downstream analytics
+      and reporting capabilities.
+    tables:
+      - name: dim_date
+        description: "Date dimension table."
+        columns:
+          - name: date_actual
+            data_type: date
+            description: "Date in date format"
+            tests:
+              - not_null
+              - unique
+              - dbt_expectations.expect_row_values_to_have_recent_data:
+                  datepart: day
+                  interval: 1
+
+      - name: trading_transactions
+        description: >
+          Core fact table capturing all trading transactions with complete
+          metadata, pricing information, and related attributes for comprehensive
+          trade analysis and reporting.
+        columns:
+          - name: trade_date
+            data_type: date
+            description: "Date when the trade was executed"
+            tests:
+              - not_null
+              - dbt_expectations.expect_column_values_to_be_between:
+                  min_value: '2020-01-01'
+                  max_value: '{{ var("max_trade_date") }}'
+
+          - name: transaction_id
+            data_type: text
+            description: "Unique identifier for each trade transaction"
+            tests:
+              - not_null
+              - unique
+              - dbt_expectations.expect_column_value_lengths_to_be_between:
+                  min_value: 10
+                  max_value: 50
+              - no_duplicate_trades:
+                trade_timestamp_column: deal_timestamp
+
+          - name: product_code
+            data_type: text
+            description: "Product identifier linking to product_metadata"
+            tests:
+              - not_null
+              - relationships:
+                  to: source('public', 'product_metadata')
+                  field: product_code
+
+          - name: transaction_type
+            data_type: text
+            description: "Type of transaction (BUY/SELL)"
+            tests:
+              - not_null
+              - dbt_expectations.expect_column_values_to_be_in_set:
+                  value_set: ['BUY', 'SELL']
+
+          - name: asset_location
+            data_type: text
+            description: "Location code for the traded asset"
+            tests:
+              - not_null
+              - relationships:
+                  to: source('public', 'geo_location')
+                  field: location_code
+
+          - name: total_weight_kg
+            data_type: double precision
+            description: "Total weight of the traded asset in kilograms"
+            tests:
+              - suspicious_trading_volume:
+                  avg_window: 14
+
+      - name: fact_inventory
+        description: >
+          Daily inventory snapshot containing current stock levels, grades,
+          and storage information across all facilities.
+        columns:
+          - name: entry_date
+            data_type: date
+            description: "Date of inventory record"
+            tests:
+              - not_null
+              - dbt_expectations.expect_row_values_to_have_recent_data:
+                  datepart: day
+                  interval: 1
+
+          - name: storage_id
+            data_type: text
+            description: "Unique identifier for storage location"
+            tests:
+              - not_null
+              - relationships:
+                  to: source('public', 'dim_stores')
+                  field: storage_id
+
+          - name: is_verified
+            data_type: boolean
+            description: "Verification status of inventory entry"
+            tests:
+              - not_null
+
+          - name: approval_status
+            data_type: text
+            description: "Current approval state of inventory record"
+            tests:
+              - not_null
+              - dbt_expectations.expect_column_values_to_be_in_set:
+                  value_set: ['PENDING', 'APPROVED', 'REJECTED']
+
+      - name: product_metadata
+        description: >
+          Reference table containing comprehensive product information including
+          categorization, location, and pricing details.
+        tests:
+          - dbt_expectations.expect_table_row_count_to_be_between:
+              min_value: 1
+        columns:
+          - name: product_code
+            data_type: text
+            description: "Unique product identifier"
+            tests:
+              - not_null
+              - unique
+              - dbt_expectations.expect_column_value_lengths_to_be_between:
+                  min_value: 3
+                  max_value: 6
+
+          - name: product_name
+            data_type: text
+            description: "Unique product name"
+            tests:
+              - not_null
+              - unique
+
+          - name: product_type
+            data_type: text
+            description: "Type of product."
+            tests:
+              - not_null
+
+      - name: dim_stores
+        description: "Metadata on the stores."
+        columns:
+          - name: store_id
+            data_type: text
+            description: "Unique identifier for the store."
+            tests:
+              - not_null
+              - unique
+
+          - name: storage_id
+            data_type: text
+            description: "Identifier for the storage location within the store."
+            tests:
+              - not_null
+              - unique
+              
+          - name: region
+            data_type: text
+            description: "Geographical region where the store is located."
+            tests:
+              - not_null
+
+      - name: geo_location
+        description: "Geographical locations of trades."
+        columns:
+          - name: location_code
+            data_type: text
+            description: "Code for the location."
+            tests:
+              - not_null
+              - unique
+          - name: location
+            data_type: text
+            description: "Location of the trade."
+            tests:
+              - not_null
+              - unique
+          - name: region
+            data_type: text
+            description: "Region of the trade."
+            tests:
+              - not_null
+
+
+  - name: analytics_mart
+    description: "Schema that stores modeled trade-related data."
+    tables:
+      - name: national_trade_volume
+        description: "Contains aggregated national trade volumes."
+        columns:
+          - name: trade_date
+            data_type: date
+            description: "Date of the trade transaction."
+            tests:
+              - not_null
+              - unique
+          - name: product
+            data_type: text
+            description: "Product traded."
+            tests:
+              - not_null
+          - name: total_trade_volume
+            data_type: double precision
+            description: "Total trade volume for the given date."
+            tests:
+              - not_null
+
+      - name: transport_matrix
+        description: "Transportation grid dimensions for product movement."
+        columns:
+          - name: origin
+            data_type: text
+            description: "Origin location."
+          - name: destination
+            data_type: text
+            description: "Destination location."
+          - name: distance
+            data_type: double precision
+            description: "Distance between origin and destination."
+          - name: transport_cost
+            data_type: double precision
+            description: "Cost of transportation between origin and destination."

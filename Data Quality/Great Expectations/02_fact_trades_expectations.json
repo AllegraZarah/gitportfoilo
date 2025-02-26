@@ -1,0 +1,790 @@
+{
+  "data_asset_type": null,
+  "expectation_suite_name": "fact_trades_expectations",
+  "expectations": [
+    {
+      "expectation_type": "expect_table_columns_to_match_set",
+      "kwargs": {
+        "column_set": [
+          "transaction_price",
+          "discount",
+          "client_type",
+          "user_type",
+          "client_id","total_weight_kg",
+          "currency",
+          "currency_code",
+          "client_country_code",
+          "client_country",
+          "system_name",
+          "request_id",
+          "requested_volume",
+          "client_email",
+          "fee_per_trade",
+          "actual_trade_vol_mt"
+          "is_deleted",
+          "transaction_units",
+          "vat_value",
+          "transaction_type",
+          "actual_trade_value",
+          "trade_date",
+          "client_phone",
+          "discount_type",
+          "deduction",
+          "client_fullname",
+          "asset_code",
+          "trade_status",
+          "units_volume",
+          "requested_units",
+          "transaction_id",
+          "asset_name",
+          "asset_location"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "transaction_price"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "client_id"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "currency"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "currency_code"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "client_country_code"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "client_country"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "trade_is_on_behalf"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "requested_price"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "asset_type"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "system_name"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "request_id"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "requested_volume"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "client_email"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "fee_per_trade"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "is_deleted"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "transaction_type"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "trade_date"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "client_phone"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "deduction"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "client_fullname"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "asset_code"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "trade_status"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "units_volume"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "requested_units"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "client_type"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "user_type"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "transaction_id"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "asset_name"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "asset_location"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "deal_timestamp"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "trade_timestamp"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "sec_fee",
+        "condition_parser": "great_expectations__experimental__",
+        "row_condition": "col(\"trade_status\") == \"Merged\""
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "total_weight_kg",
+        "condition_parser": "great_expectations__experimental__",
+        "row_condition": "col(\"trade_status\") == \"Merged\""
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "actual_trade_vol_mt",
+        "condition_parser": "great_expectations__experimental__",
+        "row_condition": "col(\"trade_status\") == \"Merged\""
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "transaction_units",
+        "condition_parser": "great_expectations__experimental__",
+        "row_condition": "col(\"trade_status\") == \"Merged\""
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "vat_value",
+        "condition_parser": "great_expectations__experimental__",
+        "row_condition": "col(\"trade_status\") == \"Merged\""
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "actual_trade_value",
+        "condition_parser": "great_expectations__experimental__",
+        "row_condition": "col(\"trade_status\") == \"Merged\""
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "processed_inventory",
+        "condition_parser": "great_expectations__experimental__",
+        "row_condition": "col(\"security_type\")==\"Options\" & col(\"trade_status\")==\"Merged\""
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "is_contract_note_sent",
+        "condition_parser": "great_expectations__experimental__",
+        "row_condition": "col(\"security_type\")==\"Options\" & col(\"trade_status\")==\"Merged\""
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "asset_location",
+        "condition_parser": "great_expectations__experimental__",
+        "row_condition": "col(\"security_type\")==\"Futures\" | col(\"security_type\")==\"Options\""
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "transaction_id"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "client_type",
+        "mostly": 1.0,
+        "type_": "TEXT"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "user_type",
+        "mostly": 1.0,
+        "type_": "TEXT"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "currency",
+        "mostly": 1.0,
+        "type_": "TEXT"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "asset_type",
+        "mostly": 1.0,
+        "type_": "TEXT"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "system_name",
+        "mostly": 1.0,
+        "type_": "TEXT"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "request_id",
+        "mostly": 1.0,
+        "type_": "TEXT"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "transaction_type",
+        "mostly": 1.0,
+        "type_": "TEXT"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "asset_code",
+        "mostly": 1.0,
+        "type_": "TEXT"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "trade_status",
+        "mostly": 1.0,
+        "type_": "TEXT"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "transaction_id",
+        "mostly": 1.0,
+        "type_": "TEXT"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "asset_name",
+        "mostly": 1.0,
+        "type_": "TEXT"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "requested_volume",
+        "mostly": 1.0,
+        "type_": "INTEGER"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "units_volume",
+        "mostly": 1.0,
+        "type_": "INTEGER"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "requested_units",
+        "mostly": 1.0,
+        "type_": "INTEGER"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "transaction_price",
+        "mostly": 1.0,
+        "type_": "FLOAT"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "requested_price",
+        "mostly": 1.0,
+        "type_": "FLOAT"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "fee_per_trade",
+        "mostly": 1.0,
+        "type_": "FLOAT"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "trade_is_on_behalf",
+        "mostly": 1.0,
+        "type_": "BOOLEAN"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "is_deleted",
+        "mostly": 1.0,
+        "type_": "BOOLEAN"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "trade_date",
+        "mostly": 1.0,
+        "type_": "TIMESTAMP"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "deal_timestamp",
+        "mostly": 1.0,
+        "type_": "TIMESTAMP"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "trade_timestamp",
+        "mostly": 1.0,
+        "type_": "TIMESTAMP"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "transaction_id",
+        "mostly": 1.0,
+        "regex": "^\\d{12}$"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "client_email",
+        "mostly": 1.0,
+        "regex": "^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "trade_date",
+        "max_value": "2023-10-12",
+        "min_value": "2020-01-09",
+        "mostly": 1.0,
+        "strict_max": true,
+        "strict_min": true
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "trade_timestamp",
+        "max_value": "2023-10-12 17:33:50.706617+00:00",
+        "min_value": "2020-01-06 00:00:00+00:00",
+        "mostly": 1.0,
+        "strict_max": true,
+        "strict_min": true
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "deal_timestamp",
+        "max_value": "2023-10-12 17:33:50.706617+00:00",
+        "min_value": "2020-02-20 00:00:00+00:00",
+        "mostly": 1.0,
+        "strict_max": true,
+        "strict_min": true
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "trade_status",
+        "mostly": 1.0,
+        "value_set": [
+          "Open",
+          "Partial-Merge",
+          "Merged",
+          "Cancelled"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "currency",
+        "mostly": 1.0,
+        "value_set": [
+          "US Dollars",
+          "Pounds",
+          "Euro"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "currency_code",
+        "mostly": 1.0,
+        "value_set": [
+          "USD", 
+          "GBP", 
+          "EUR"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "system_name",
+        "mostly": 1.0,
+        "value_set": [
+          "BASE", 
+          "EXTERNAL", 
+          "NEXT"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "units_volume",
+        "mostly": 1.0,
+        "value_set": [
+          10,
+          1000
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "transaction_type",
+        "mostly": 1.0,
+        "value_set": [
+          "Disperse",
+          "Purchase"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "client_type",
+        "mostly": 1.0,
+        "value_set": [
+          "Intermediary",
+          "Advocate",
+          "Trader"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "user_type",
+        "mostly": 1.0,
+        "value_set": [
+          "Personal",
+          "Business"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "client_country",
+        "mostly": 1.0,
+        "value_set": [
+          "United States of America",
+          "Canada",
+          "Japan",
+          "United Kingdom of Great Britain and Northern Ireland"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "client_country_code",
+        "mostly": 1.0,
+        "value_set": [
+          "US",
+          "CA",
+          "JP",
+          "UK"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "asset_type",
+        "mostly": 1.0,
+        "value_set": [
+          "Futures",
+          "Forwards",
+          "Options"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "asset_name",
+        "mostly": 1.0,
+        "value_set": [
+          "asset1",
+          "asset2",
+          "asset3",
+          "asset4",
+          "asset5",
+          "asset6",
+          "asset7",
+          "asset8",
+          "asset9",
+          "asset10"
+          ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "asset_code",
+        "mostly": 1.0,
+        "value_set": [
+          "ASS78", 
+          "HSS87", 
+          "JSS98", 
+          "KSS09", 
+          "LSS10", 
+          "MSS11", 
+          "NSS12", 
+          "OSS13", 
+          "PSS14", 
+          "QSS15"
+        ]
+      },
+      "meta": {}
+    }
+  ],
+  "ge_cloud_id": null,
+  "meta": {
+    "great_expectations_version": "0.17.19"
+  }
+}
