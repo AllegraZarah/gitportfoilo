@@ -11,8 +11,8 @@ sources:
       - name: historical_product_prices
         description: "Historical prices for various products."
       - name: product_prices
-        description: "Current product prices. Starts from when the h9storical prices end."
-      - name: historic_asset_prices
+        description: "Current product prices. Starts from when the historical prices end."
+      - name: historical_asset_prices
         description: "Historical prices for various assets."
       - name: product_metadata
         description: "Metadata for products including name, code, location, etc."
@@ -27,8 +27,6 @@ sources:
   - name: analytics_mart
     description: "Schema that stores modeled trade-related data."
     tables:
-      - name: fact_product_market_prices
-        description: "Contains modeled price data including the end of day , minimum, maximum and start pf day prices and the changes over time."
       - name: national_trade_volume
         decsription: "Contains aggregated national trade volumes."
       - name: transport_matrix
