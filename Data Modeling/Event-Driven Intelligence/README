@@ -1,6 +1,6 @@
 # Event-Driven Intelligence
 
-Transforming raw event logs into actionable intelligence through sophisticated data pipelines and analytical models. This repository showcases a collection of projects that leverage event-based data to derive meaningful insights, from actor performance metrics to real-time balance tracking systems.
+Transforming raw event logs into actionable intelligence through sophisticated data pipelines and analytical models. This directory showcases a collection of projects that leverage event-based data to derive meaningful insights, from actor performance metrics to real-time balance tracking systems.
 
 Each project demonstrates the power of event-driven architecture in solving complex business challenges, combining robust data engineering practices with advanced analytics to create scalable, production-ready solutions.
 
