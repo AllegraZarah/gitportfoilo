@@ -234,9 +234,9 @@ final AS (
                                                  ORDER BY ui.transaction_date) latest_trans_at
 
     FROM unique_identifier ui
-    LEFT JOIN public.crm_client cl
+    LEFT JOIN public.dim_client cl
     ON ui.client_id = cl.id
-    LEFT JOIN public.crm_location loc
+    LEFT JOIN public.dim_location loc
     ON ui.location_code_after = loc.code
    )
 
